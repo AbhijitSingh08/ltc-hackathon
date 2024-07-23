@@ -5,7 +5,7 @@ FROM node:18 AS build
 WORKDIR /ltc-hackathon
 
 # Copy frontend package.json and package-lock.json
-COPY frontend/package.json frontend/package-lock.json ./frontend/
+COPY package.json package-lock.json ./frontend/
 
 # Install dependencies for the frontend
 RUN npm install --prefix frontend
