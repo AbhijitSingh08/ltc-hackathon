@@ -1,4 +1,4 @@
-FROM node:14 AS build-stage
+FROM node:latest AS build-stage
 
 WORKDIR /frontend
 
@@ -10,11 +10,11 @@ COPY . .
 
 RUN npm run build
 
-FROM node:14
+FROM node:latest
 
 WORKDIR /frontend
 
-COPY --from=build-stage . ./dist
+COPY --from=build-stage /frontend/dist ./dist
 
 RUN npm install -g serve
 
