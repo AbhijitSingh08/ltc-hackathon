@@ -23,7 +23,7 @@ FROM node:18
 WORKDIR /ltc-hackathon
 
 # Copy the built React files and Node.js server files
-COPY --from=build /ltc-hackathon/frontend/dist ./dist
+COPY --from=build /dist ./dist
 COPY backend/index.js ./index.js
 COPY backend/package.json backend/package-lock.json ./
 
