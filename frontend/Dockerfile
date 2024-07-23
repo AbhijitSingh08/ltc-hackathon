@@ -1,31 +1,37 @@
-FROM node:14 as build
+# Stage 1: Build the React application
+FROM node:18 AS build
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /ltc-hackathon
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy frontend package.json and package-lock.json
+COPY frontend/package.json frontend/package-lock.json ./frontend/
 
-# Install dependencies
+# Install dependencies for the frontend
+RUN npm install --prefix frontend
+
+# Copy the rest of the frontend code
+COPY frontend ./frontend
+
+# Build the React application
+RUN npm run build --prefix frontend
+
+# Stage 2: Setup Node.js server
+FROM node:18
+
+# Set the working directory
+WORKDIR /ltc-hackathon
+
+# Copy the built React files and Node.js server files
+COPY --from=build /ltc-hackathon/frontend/dist ./dist
+COPY backend/index.js ./index.js
+COPY backend/package.json backend/package-lock.json ./
+
+# Install Node.js server dependencies
 RUN npm install
 
-# Copy the rest of the application code to the container
-COPY . .
-
-# Build the React app
-RUN npm run build
-
-# Stage 2: Serve the React application with Node.js
-FROM node:14-alpine
-
-# Set the working directory
-WORKDIR /app
-
-# Copy build output from Stage 1 to Stage 2
-COPY --from=build /app/build ./build
-
-# Expose port 3000 to the outside world
+# Expose the port the app runs on
 EXPOSE 80
 
-# Command to run the React app
-CMD ["node", "./build/index.js"]
+# Command to run the Node.js server
+CMD ["node", "index.js"]
