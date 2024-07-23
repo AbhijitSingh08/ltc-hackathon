@@ -23,7 +23,7 @@ FROM node:14
 WORKDIR /frontend
 
 # Copy build output from Stage 1
-COPY --from=build /frontend/build ./build
+COPY --from=build /frontend/dist ./dist
 
 # Install serve globally to serve static files
 RUN npm install -g serve
