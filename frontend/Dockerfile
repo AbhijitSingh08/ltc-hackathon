@@ -5,13 +5,13 @@ FROM node:14 as build
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code
-COPY frontend ./
+COPY . .
 
 # Build the React app
 RUN npm run build
@@ -32,4 +32,4 @@ RUN npm install -g serve
 EXPOSE 80
 
 # Command to run the application
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["serve", "-s", "build", "-l", "80"]
