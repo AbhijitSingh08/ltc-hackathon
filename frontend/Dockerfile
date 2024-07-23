@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run build
 
+RUN ls -la /frontend/dist
+
 FROM node:14
 
 WORKDIR /frontend
