@@ -16,7 +16,7 @@ FROM node:14
 
 WORKDIR /frontend
 
-COPY --from=build-stage /frontend/dist /frontend/dist
+COPY --from=build-stage /dist ./dist
 
 RUN npm install -g serve
 
