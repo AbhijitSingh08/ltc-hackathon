@@ -20,10 +20,10 @@ RUN npm run build
 FROM node:14
 
 # Set working directory
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy build output from Stage 1
-COPY --from=build /app/build ./build
+COPY --from=build /frontend/build ./build
 
 # Install serve globally to serve static files
 RUN npm install -g serve
