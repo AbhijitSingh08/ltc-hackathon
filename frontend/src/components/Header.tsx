@@ -1,4 +1,4 @@
-import React from "react";
+
 import { StyledHeaderDiv } from "../styles/Header.styled";
 
 const Header = () => {
