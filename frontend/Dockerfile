@@ -10,13 +10,11 @@ COPY . .
 
 RUN npm run build
 
-RUN ls -la
-
 FROM node:14
 
 WORKDIR /frontend
 
-COPY --from=build-stage /dist ./dist
+COPY --from=build-stage /dist/* ./dist
 
 RUN npm install -g serve
 
