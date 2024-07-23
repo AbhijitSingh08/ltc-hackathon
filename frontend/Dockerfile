@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-RUN ls -la /frontend/dist
+RUN ls -la
 
 FROM node:14
 
