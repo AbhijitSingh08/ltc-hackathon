@@ -8,13 +8,13 @@ WORKDIR /ltc-hackathon
 COPY package*.json ./
 
 # Install dependencies for the frontend
-RUN npm install --prefix frontend
+RUN npm install
 
 # Copy the rest of the frontend code
-COPY frontend ./frontend
+COPY . .
 
 # Build the React application
-RUN npm run build --prefix frontend
+RUN npm run build
 
 # Stage 2: Setup Node.js server
 FROM node:18
